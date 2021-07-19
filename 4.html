@@ -1,0 +1,33 @@
+<html>
+
+<head>
+    <script>
+        fetch("https://think.cs.vt.edu/corgis/datasets/json/airlines/airlines.json")
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                for (var x in data) {
+                    var a = data[x].Statistics.Flights.Cancelled;
+                    var b = data[x].Statistics.Flights.Delayed;
+                    var c = data[x].Statistics.Flights.Diverted;
+                    var d = data[x].Statistics.Flights['On Time'];
+
+                    document.write(`${data[x].Airport.Name}-Flights Cancelled:${data[x].Statistics.Flights.Cancelled}, 
+                  Flights Delayed:${data[x].Statistics.Flights.Delayed},
+                   Flights Diverted:${data[x].Statistics.Flights.Diverted},
+                   Flights On Time:${data[x].Statistics.Flights["On Time"]}<br>`);
+                    if (a + b + c + d == data[x].Statistics.Flights.Total) {
+                        document.write(`YES the sum of all four is equal to the total: ${data[x].Statistics.Flights.Total}<br>`)
+                    }
+                    else {
+                        document.write(`NO the sum of all four is not equal to the total: ${data[x].Statistics.Flights.Total}<br>`)
+                    }
+
+                }
+            })
+            .catch((error) => console.log(error));
+
+    </script>
+</head>
+
+</html>
